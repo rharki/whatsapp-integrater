@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Template model for storing message templates
+model Template {
+  id          String   @id @default(cuid())
+  name        String   // Template name
+  content     String   // Template content with placeholders like {{name}}, {{company}}
+  category    String   // Category: marketing, support, notification, etc.
+  placeholders String  // JSON string of available placeholders
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  messages Message[]
+
+  @@map("templates")
+}
+
+// Message model for tracking sent messages
+model Message {
+  id              String   @id @default(cuid())
+  templateId      String?  // Optional: if sent from a template
+  phoneNumber     String   // Recipient's phone number
+  content         String   // Final message content (after placeholder replacement)
+  status          String   @default("pending") // pending, sent, delivered, failed
+  whatsappMessageId String? // WhatsApp's message ID
+  sentAt          DateTime @default(now())
+  responseReceived Boolean @default(false)
+
+  // Relations
+  template Template? @relation(fields: [templateId], references: [id])
+  responses Response[]
+
+  @@map("messages")
+}
+
+// Response model for storing user responses
+model Response {
+  id           String   @id @default(cuid())
+  messageId    String   // Reference to the original message
+  phoneNumber  String   // User's phone number
+  responseType String   // text, button, poll
+  content      String   // Response content
+  receivedAt   DateTime @default(now())
+
+  // Relations
+  message Message @relation(fields: [messageId], references: [id])
+
+  @@map("responses")
+}
+
+// Poll model for creating polls
+model Poll {
+  id        String   @id @default(cuid())
+  question  String   // Poll question
+  options   String   // JSON string of poll options
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  // Relations
+  pollResponses PollResponse[]
+
+  @@map("polls")
+}
+
+// PollResponse model for storing poll responses
+model PollResponse {
+  id           String   @id @default(cuid())
+  pollId       String   // Reference to the poll
+  phoneNumber  String   // User's phone number
+  selectedOption String // Selected option
+  respondedAt  DateTime @default(now())
+
+  // Relations
+  poll Poll @relation(fields: [pollId], references: [id])
+
+  @@map("poll_responses")
+}
