@@ -1,0 +1,145 @@
+.responses {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.responses h2 {
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+.responses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-controls label {
+  color: #555;
+  font-weight: 500;
+}
+
+.filter-controls select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.stats {
+  color: #666;
+  font-weight: 500;
+}
+
+.responses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.response-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-left: 4px solid #28a745;
+}
+
+.response-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.phone-number {
+  font-weight: bold;
+  color: #333;
+}
+
+.response-type {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.response-type.text {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.response-type.button {
+  background: #d4edda;
+  color: #155724;
+}
+
+.response-type.poll {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.response-content {
+  margin: 15px 0;
+}
+
+.response-content p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.response-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.received-time {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.response-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s;
+}
+
+.action-btn:hover {
+  background: #0056b3;
+}
+
+.no-responses {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+} 
